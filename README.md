@@ -11,25 +11,42 @@ I have opted to give a brief run down of the process of implemention of a Java p
 
 **Note: If you are uploading Jar/zip, make sure you are using Java 11, if you are using a docker container then there are no restrictions  on the version to my knowledge.**
 
-## Dependencies
+## Dependencies and Plugins
 The following dependencies are a must for performing basic read operation on S3 object using lambda.
 ```xml
-    <dependency>
+    		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-s3</artifactId>
 			<version>1.12.420</version>
 		</dependency>
-    <dependency>
+    		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-lambda-java-core</artifactId>
 			<version>1.2.2</version>
 		</dependency>
-    <dependency>
+    		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-lambda-java-events</artifactId>
 			<version>3.11.0</version>
 		</dependency>
 ```
+**It is recommended to use shade plugin so that the classes included in the above dependencies are available in our jar**
+```xml
+		<plugin>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.4</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+		</plugin>
+```
+Note: I have found in my practice that <pluginmanagement> tag was causing shade plugins to not load. So, I removed the <pluginmanagement> tag entirely and put my plugins under the <plugins> tag.
+
 
 ## Create a Lambda Function
 Head over to AWS console and look up lambda, create a function with a specific name and Runtime as Java 11(Corretto) or whatever Java version your code is compiled using provided it is available.
