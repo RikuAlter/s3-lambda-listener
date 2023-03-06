@@ -5,10 +5,12 @@ The code does not perform the detection of the event, that functionality is made
 
 I have opted to give a brief run down of the process of implemention of a Java program to do the above here. Starting from IAM role creation to viewing logs in Cloudwatch for our program.
 
-# Pre-requisites
+## Pre-requisites
 1. A bucket created in S3
 2. IDE to write the Java code 
 
 **Note: If you are uploading Jar/zip, make sure you are using Java 11, if you are using a docker container then there are no restrictions  on the version to my knowledge.**
 
-# Create a Lambda Function
+## Create a Lambda Function
+
+![Lambda Create function](https://github.com/RikuAlter/s3-lambda-listener/blob/main/img/Screenshot%20(2).png "Lambda Create function")
